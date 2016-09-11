@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+	int xs;
+	for(xs='A';xs<='D';xs++)
+	{
+		if((xs!='A')+(xs=='C')+(xs=='D')+(xs!='D')==3)
+	
+			printf("凶手是%c",xs);
+		
+	}
+	system("pause");
+	return 0;
+}
