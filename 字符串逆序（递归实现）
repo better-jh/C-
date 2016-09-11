@@ -1,0 +1,31 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+char *reverse(char *str)
+{
+	char *left=str;
+	char *right=str+strlen(str)-1;
+	char tmp;
+	if(*left!='\0')
+	{
+		tmp=*left;
+		*left=*right;
+		*right='\0';
+		reverse(str+1);
+		*right=tmp;
+		return str;
+	}
+	else
+	{
+		return NULL;
+	}
+}
+int main()
+{
+	char str[20]="abcdef";
+	char *ret=reverse(str);
+	printf("%s\n",ret);
+	system("pause");
+	return 0;
+}
