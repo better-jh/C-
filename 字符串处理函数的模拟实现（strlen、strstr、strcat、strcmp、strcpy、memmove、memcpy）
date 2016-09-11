@@ -1,0 +1,386 @@
+1.strlen()函数的模拟实现（计数器法）
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+int my_strlen(const char *arr)
+{
+	int count=0;
+	assert(arr!=NULL);
+	while(*arr!='\0')
+	{
+		arr++;
+		count++;
+	}
+	return count;
+}
+int main()
+{
+	char arr[]="abcdgddf";
+	int ret;
+	ret=my_strlen(arr);
+	printf("%d\n",ret);
+	system("pause");
+	return 0;
+}
+
+strlen()函数的模拟实现（指针）
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+int my_strlen(char *arr)
+{
+	char *p=arr;
+	assert(arr!=NULL);
+	while(*p!='\0')
+	{
+		p++;
+	}
+	return p-arr;
+}
+int main()
+{
+	char arr[]="sfjfkdsjk";
+	int ret=0;
+	ret=my_strlen(arr);
+	printf("%d\n",ret);
+	system("pause");
+	return 0;
+}
+
+strlen()函数的模拟实现（递归）
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+int my_strlen(const char *arr)
+{
+	assert(arr!=NULL);
+	if(*arr=='\0')
+	{
+		return 0;
+	}
+	else
+	{
+		return 1+my_strlen(arr+1);
+	}
+}
+int main()
+{
+	char arr[]="sfjfkdsjk";
+	int ret=0;
+	ret=my_strlen(arr);
+	printf("%d\n",ret);
+	system("pause");
+	return 0;
+}
+
+2.strstr()函数的模拟实现
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+char *my_strstr(char *dest,char *src)
+{
+	assert(dest!=NULL);
+	assert(src!=NULL);
+	while(*dest!='\0')
+	{
+		char *p=dest;
+		char *q=src;
+		char *start=NULL;
+		if(*p==*q)
+		{
+			start=p;
+			while(*p==*q)
+			{
+				p++;
+				q++;
+			}
+			if(*q=='\0')
+			{
+				return start;
+			}
+		}
+		dest++;
+	}
+	return 0;
+}
+int main()
+{
+	char arr1[]="abbcdef";
+	char arr2[]="bcde";
+	char *ret=my_strstr(arr1,arr2);
+	if(ret==0)
+	{
+		printf("没找到\n");
+	}
+	else
+	{
+		printf("%s\n",ret);
+	}
+	system("pause");
+	return 0;
+}
+
+3.strcpy()函数的模拟实现
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+char *my_strcpy(char *dest,const char *src)
+{
+	char *ret=dest;
+	assert(dest!=NULL);
+	assert(src!=NULL);
+	while(*src!='\0')
+	{
+		*dest=*src;
+		dest++;
+		src++;
+	}
+	return ret;
+}
+int main()
+{
+	char arr1[]="lkjhefg";
+	char arr2[]="abcd";
+	char *ret=my_strcpy(arr1,arr2);
+	printf("%s\n",ret);
+	system("pause");
+	return 0;
+}
+
+4.strncpy()函数的模拟实现
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+char *my_strncpy(char *dest,char *src,int n)
+{
+	char *ret=dest;
+	assert(dest!=NULL);
+	assert(src!=NULL);
+	while(n!=0 && *src!='\0')
+	{
+		*dest++=*src++;
+		n--;
+	}
+	if(n!=0)
+	{
+		while(n)
+		{
+			*dest='\0';
+			n--;
+		}
+	}
+	return ret;
+}
+int main()
+{
+	char arr1[]="kpouycdefgh";
+	char arr2[]="abcdefghi";
+	char *ret=my_strncpy(arr1,arr2,12);
+	printf("%s\n",ret);
+	system("pause");
+	return 0;
+}
+
+5.strcat()函数的模拟实现
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <string.h>
+char *my_strcat(char *dest,char *src)
+{
+	char *ret=dest;
+	char *p=dest+strlen(dest);
+	assert(dest!=NULL);
+	assert(src!=NULL);
+	while(*src!='\0')
+	{
+		*p++=*src++;
+
+	}
+	return ret;
+}
+int main()
+{
+	char arr1[20]="abc";
+	char arr2[10]="defg";
+	char *ret=my_strcat(arr1,arr2);
+	printf("%s\n",ret);
+	system("pause");
+	return 0;
+}
+
+6.strncat()函数的模拟实现
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <string.h>
+char *my_strncat(char *dest,char *src,int n)
+{
+	char *ret=dest;
+	char *p=dest+strlen(dest);
+	assert(dest!=NULL);
+	assert(src!=NULL);
+	while(n && *src!='\0')
+	{
+		*p++=*src++;
+		n--;
+	}
+	if(n!=0)
+	{
+		while(n)
+		{
+			*p='\0';
+			n--;
+		}
+	}
+	return ret;
+}
+int main()
+{
+	char arr1[20]="abc";
+	char arr2[10]="defg";
+	char *ret=my_strncat(arr1,arr2,5);
+	printf("%s\n",ret);
+	system("pause");
+	return 0;
+}
+
+7.strcmp()函数的模拟实现
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+int my_strcmp(char *dest,char *src)
+{
+	assert(dest!=NULL);
+	assert(src!=NULL);
+	while(*dest==*src)
+	{
+		if(*dest=='\0')
+		{
+			return 0;
+		}
+		dest++;
+		src++;
+	}
+	return *dest-*src;
+}
+int main()
+{
+	char arr1[]="abcdefgsgr";
+	char arr2[]="abcdef";
+	int ret=my_strcmp(arr1,arr2);
+	printf("%d\n",ret);
+	system("pause");
+	return 0;
+}
+
+8.strncmp()函数的模拟实现
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+int my_strncmp(char *dest,char *src,int n)
+{
+	assert(dest!=NULL);
+	assert(src!=NULL);
+	while(n &&*dest==*src)
+	{
+		/*if(*dest=='\0')
+		{
+			return 0;
+		}*/
+		dest++;
+		src++;
+		n--;
+	}
+	return *dest-*src;
+}
+int main()
+{
+	char arr1[]="abcdefrtgdger";
+	char arr2[]="abcrtdg";
+	int ret=my_strncmp(arr1,arr2,2);
+	printf("%d\n",ret);
+	system("pause");
+	return 0;
+}
+
+9.memcpy()函数的模拟实现
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+void *my_memcpy(void *dest,void *src,int n)
+{
+	void *ret=dest;
+	assert(dest!=NULL);
+	assert(src!=NULL);
+	while(n)
+	{
+		*(char *)dest=*(char *)src;
+		dest=(char *)dest+1;
+		src=(char *)src+1;
+		n--;
+	}
+	return ret;
+}
+int main()
+{
+	char arr1[20]="dfskfkljsffds";
+	char arr2[]="saf .v/?";
+	char *ret=my_memcpy(arr1,arr2,7);
+	printf("%s\n",ret);
+	system("pause");
+	return 0;
+}
+10.memmove()函数的模拟实现
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+void *my_memmove(void *dest,void *src,size_t count)
+{
+	void *ret=dest;
+	assert(dest!=NULL);
+	assert(src!=NULL);
+	if(dest>src && (char *)dest<(char *)src+count )
+	{
+	
+		while(count--)
+		{
+			*((char *)dest+count)=*((char *)src+count);
+		}
+	}
+	else
+	{
+		while(count--)
+		{
+			*(char *)dest=*(char *)src;
+			dest=(char *)dest+1;
+			src=(char *)src+1;
+		}
+	}
+	return ret;
+}
+int main()
+{
+	int arr[]={1,2,3,4,5,6,7,8,9,0};
+	int i=0;
+	int sz=sizeof(arr)/sizeof(arr[0]);
+	my_memmove(arr+4,arr,4*sizeof(int));
+	for(i=0;i<sz;i++)
+	{
+		printf("%d ",arr[i]);
+	}
+	system("pause");
+	return 0;
+}
